@@ -1,0 +1,77 @@
+<ng-container *ngrxLet="passengerList$ as passengers">
+
+  <div class="card">
+
+    <div class="header">
+      <h2 class="title">Passenger Search</h2>
+    </div>
+    <div class="content">
+
+      <form>
+
+        <div class="form-group">
+          <label>Firstname:</label>
+          <input [(ngModel)]="firstname" name="firstname" class="form-control">
+        </div>
+        <div class="form-group">
+          <label>Name:</label>
+          <input [(ngModel)]="name" name="name" class="form-control">
+        </div>
+
+        <div class="form-group">
+          <button (click)="load()" [disabled]="!name"
+            class="btn btn-default">
+            Search
+          </button>
+
+          <div *ngIf="passengers.length > 0">
+            {{ passengers.length }} passengers found!
+          </div>
+
+        </div>
+      </form>
+
+    </div>
+  </div>
+
+  <div class="card">
+
+    <table class="table table-condensed" *ngIf="passengers.length">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Firstname</th>
+                <th>Name</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr
+              *ngFor="let p of passengers"
+              [class.active]="p === selectedPassenger">
+              <td><span class="badge badge-pill badge-info">
+                {{ p.id }}
+              </span></td>
+              <td>{{ p.firstName }}</td>
+              <td>{{ p.name }}</td>
+              <td>
+                <button
+                  (click)="toggleSelection(p)"
+                  class="btn btn-info btn-sm"
+                  style="min-width: 85px">
+                  {{ p === selectedPassenger ? 'Remove' : 'Select' }}
+                </button>
+                <a
+                  [routerLink]="['../edit', p.id]"
+                  class="btn btn-success btn-sm"
+                  style="min-width: 85px">
+                  Edit
+                </a>
+              </td>
+            </tr>
+        <tbody>
+    </table>
+
+  </div>
+
+</ng-container>

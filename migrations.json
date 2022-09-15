@@ -1,0 +1,12 @@
+{
+  "migrations": [
+    {
+      "factory": "./src/schematics/migrate-to-14-3/schematic#index",
+      "schema": "./src/schematics/migrate-to-14-3/schema.json",
+      "version": "14.3.0-beta.3",
+      "description": "Migrate to 14.3.0-beta.3",
+      "package": "@angular-architects/module-federation",
+      "name": "14.3.0-beta.3"
+    }
+  ]
+}
