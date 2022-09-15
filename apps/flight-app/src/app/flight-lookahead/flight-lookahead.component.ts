@@ -4,6 +4,7 @@ import { FormControl } from '@angular/forms';
 import { Flight } from '@flight-workspace/flight-lib';
 import {
   BehaviorSubject,
+  catchError,
   combineLatest,
   debounceTime,
   delay,
@@ -12,6 +13,7 @@ import {
   interval,
   map,
   Observable,
+  of,
   ReplaySubject,
   share,
   shareReplay,
@@ -75,6 +77,11 @@ export class FlightLookaheadComponent implements OnInit {
 
     const headers = new HttpHeaders().set('Accept', 'application/json');
 
-    return this.http.get<Flight[]>(url, { params, headers });
+    return this.http.get<Flight[]>(url, { params, headers }).pipe(
+      catchError(error => {
+        console.error('error', error);
+        return of([]);
+      })
+    );
   }
 }
