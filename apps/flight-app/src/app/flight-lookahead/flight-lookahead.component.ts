@@ -6,12 +6,15 @@ import {
   BehaviorSubject,
   catchError,
   combineLatest,
+  concatMap,
   debounceTime,
   delay,
   distinctUntilChanged,
+  exhaustMap,
   filter,
   interval,
   map,
+  mergeMap,
   Observable,
   of,
   ReplaySubject,
@@ -31,23 +34,14 @@ import {
   templateUrl: './flight-lookahead.component.html',
   styleUrls: ['./flight-lookahead.component.css'],
 })
-export class FlightLookaheadComponent implements OnInit, OnDestroy {
+export class FlightLookaheadComponent implements OnInit {
   control!: FormControl;
   flights$!: Observable<Flight[]>;
   private loadingSubject = new BehaviorSubject(false);
   loading$ = this.loadingSubject.asObservable();
   online$!: Observable<boolean>;
 
-  subscription = new Subscription();
-  destroy = new Subject<void>();
-
   constructor(private http: HttpClient) {}
-
-  ngOnDestroy(): void {
-    this.subscription.unsubscribe();
-
-    this.destroy.next();
-  }
 
   ngOnInit(): void {
     this.control = new FormControl();
@@ -55,21 +49,12 @@ export class FlightLookaheadComponent implements OnInit, OnDestroy {
     this.online$ = interval(2000).pipe(
       startWith(0), // starts immediately
       tap(console.log),
-      map(() => Math.random() < 0.5),
+      map(() => true),
       distinctUntilChanged(),
       share({
         connector: () => new ReplaySubject(1),
       })
     );
-
-    // Explizit & Imperativ:
-    this.subscription.add(this.online$.subscribe());
-    this.subscription.add(this.online$.subscribe());
-    this.subscription.add(this.online$.subscribe());
-
-    // Implizit & Reaktiv:
-    this.online$.pipe(take(1)).subscribe();
-    this.online$.pipe(takeUntil(this.destroy)).subscribe();
 
     const input$ = this.control.valueChanges.pipe(
       filter((value) => value.length > 2),
@@ -82,7 +67,12 @@ export class FlightLookaheadComponent implements OnInit, OnDestroy {
     }).pipe(
       filter(({ online }) => online),
       tap(() => this.loadingSubject.next(true)),
-      switchMap(({ input }) => this.load(input)),
+      // switchMap(({ input }) => this.load(input).pipe(
+      // exhaustMap(({ input }) => this.load(input).pipe(
+      // concatMap(({ input }) => this.load(input).pipe(
+      mergeMap(({ input }) => this.load(input).pipe(
+        delay(7000)
+      )),
       tap(() => this.loadingSubject.next(false))
     );
   }
