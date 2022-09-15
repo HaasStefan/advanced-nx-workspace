@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { Flight } from '@flight-workspace/flight-lib';
 import {
+  BehaviorSubject,
   combineLatest,
   debounceTime,
   delay,
@@ -17,6 +18,7 @@ import {
   startWith,
   Subject,
   switchMap,
+  tap,
 } from 'rxjs';
 
 @Component({
@@ -27,7 +29,9 @@ import {
 export class FlightLookaheadComponent implements OnInit {
   control!: FormControl;
   flights$!: Observable<Flight[]>;
-  loading = false; // this is bad --> should be reactive instead!
+
+  private loadingSubject = new BehaviorSubject(false);
+  loading$ = this.loadingSubject.asObservable();
 
   online$!: Observable<boolean>;
 
@@ -40,18 +44,9 @@ export class FlightLookaheadComponent implements OnInit {
       startWith(0), // starts immediately
       map(() => Math.random() < 0.5),
       distinctUntilChanged(),
-
-      // MULTICAST:
-
-      // shareReplay({
-      //   bufferSize: 1,
-      //   refCount: true,
-      // }),
-
-      // RxJs 7: 
-      //share({
-      //  connector: () => new ReplaySubject(1)
-      //})
+      share({
+        connector: () => new ReplaySubject(1),
+      })
     );
 
     const input$ = this.control.valueChanges.pipe(
@@ -64,7 +59,9 @@ export class FlightLookaheadComponent implements OnInit {
       online: this.online$,
     }).pipe(
       filter(({ online }) => online),
-      switchMap(({ input }) => this.load(input))
+      tap(() => this.loadingSubject.next(true)),
+      switchMap(({ input }) => this.load(input)),
+      tap(() => this.loadingSubject.next(false))
     );
   }
 
@@ -81,4 +78,3 @@ export class FlightLookaheadComponent implements OnInit {
     return this.http.get<Flight[]>(url, { params, headers });
   }
 }
-
