@@ -5,15 +5,18 @@ import { Flight } from '@flight-workspace/flight-lib';
 import {
   combineLatest,
   debounceTime,
+  delay,
   distinctUntilChanged,
   filter,
   interval,
   map,
   Observable,
+  ReplaySubject,
+  share,
+  shareReplay,
   startWith,
+  Subject,
   switchMap,
-  tap,
-  withLatestFrom,
 } from 'rxjs';
 
 @Component({
@@ -26,7 +29,6 @@ export class FlightLookaheadComponent implements OnInit {
   flights$!: Observable<Flight[]>;
   loading = false; // this is bad --> should be reactive instead!
 
-  online = false; // this is bad --> should be reactive instead!
   online$!: Observable<boolean>;
 
   constructor(private http: HttpClient) {}
@@ -38,31 +40,32 @@ export class FlightLookaheadComponent implements OnInit {
       startWith(0), // starts immediately
       map(() => Math.random() < 0.5),
       distinctUntilChanged(),
-      tap((value) => (this.online = value)) // tap --> code smell
+
+      // MULTICAST:
+
+      // shareReplay({
+      //   bufferSize: 1,
+      //   refCount: true,
+      // }),
+
+      // RxJs 7: 
+      //share({
+      //  connector: () => new ReplaySubject(1)
+      //})
     );
 
     const input$ = this.control.valueChanges.pipe(
-      filter(value => value.length > 2),
+      filter((value) => value.length > 2),
       debounceTime(300)
     );
 
     this.flights$ = combineLatest({
       input: input$,
-      online: this.online$
+      online: this.online$,
     }).pipe(
-      filter(combined => combined.online),
-      switchMap(combined => this.load(combined.input))
+      filter(({ online }) => online),
+      switchMap(({ input }) => this.load(input))
     );
-
-    // DESTRUCTING
-    // filter(({online, }) => online),
-    // switchMap(({input, }) => this.load(input))
-
-    // this.flights$ = input$.pipe(
-    //   withLatestFrom(this.online$),
-    //   filter(([, online]) => online),
-    //   switchMap(([input]) => this.load(input))
-    // );
   }
 
   load(from: string): Observable<Flight[]> {
@@ -78,3 +81,4 @@ export class FlightLookaheadComponent implements OnInit {
     return this.http.get<Flight[]>(url, { params, headers });
   }
 }
+
