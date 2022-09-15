@@ -1,5 +1,5 @@
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { Flight } from '@flight-workspace/flight-lib';
 import {
@@ -19,7 +19,10 @@ import {
   shareReplay,
   startWith,
   Subject,
+  Subscription,
   switchMap,
+  take,
+  takeUntil,
   tap,
 } from 'rxjs';
 
@@ -28,28 +31,45 @@ import {
   templateUrl: './flight-lookahead.component.html',
   styleUrls: ['./flight-lookahead.component.css'],
 })
-export class FlightLookaheadComponent implements OnInit {
+export class FlightLookaheadComponent implements OnInit, OnDestroy {
   control!: FormControl;
   flights$!: Observable<Flight[]>;
-
   private loadingSubject = new BehaviorSubject(false);
   loading$ = this.loadingSubject.asObservable();
-
   online$!: Observable<boolean>;
 
+  subscription = new Subscription();
+  destroy = new Subject<void>();
+
   constructor(private http: HttpClient) {}
+
+  ngOnDestroy(): void {
+    this.subscription.unsubscribe();
+
+    this.destroy.next();
+  }
 
   ngOnInit(): void {
     this.control = new FormControl();
 
     this.online$ = interval(2000).pipe(
       startWith(0), // starts immediately
+      tap(console.log),
       map(() => Math.random() < 0.5),
       distinctUntilChanged(),
       share({
         connector: () => new ReplaySubject(1),
       })
     );
+
+    // Explizit & Imperativ:
+    this.subscription.add(this.online$.subscribe());
+    this.subscription.add(this.online$.subscribe());
+    this.subscription.add(this.online$.subscribe());
+
+    // Implizit & Reaktiv:
+    this.online$.pipe(take(1)).subscribe();
+    this.online$.pipe(takeUntil(this.destroy)).subscribe();
 
     const input$ = this.control.valueChanges.pipe(
       filter((value) => value.length > 2),
@@ -78,7 +98,7 @@ export class FlightLookaheadComponent implements OnInit {
     const headers = new HttpHeaders().set('Accept', 'application/json');
 
     return this.http.get<Flight[]>(url, { params, headers }).pipe(
-      catchError(error => {
+      catchError((error) => {
         console.error('error', error);
         return of([]);
       })
