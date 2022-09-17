@@ -27,11 +27,19 @@ export const reducer = createReducer(
       ...state,
       flights,
     };
+  }),
+
+  on(FlightBookingActions.updateFlight, (state, { flight }) => {
+    const flights = state.flights.map((f) => (f.id === flight.id ? flight : f));
+    return {
+      ...state,
+      flights,
+    };
   })
 
   // NGRX-immer
   // https://github.com/timdeschryver/ngrx-immer
-  // 
+  //
   // immerOn(FlightBookingActions.flightsLoaded, (state, action) => {
   //   state.flights = [...action.flights];
   //   return state;
