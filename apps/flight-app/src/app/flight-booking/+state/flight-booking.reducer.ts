@@ -10,10 +10,12 @@ export interface FlightBookingAppState {
 
 export interface State {
   flights: Flight[];
+  blackList: number[];
 }
 
 export const initialState: State = {
   flights: [],
+  blackList: [3] // default: blacklist flight with id 3
 };
 
 export const reducer = createReducer(

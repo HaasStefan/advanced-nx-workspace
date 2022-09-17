@@ -7,6 +7,7 @@ import {
   FlightBookingAppState,
   flightBookingFeatureKey,
 } from '../+state/flight-booking.reducer';
+import { selectFilteredFlights } from '../+state/flight-booking.selectors';
 
 @Component({
   selector: 'flight-search',
@@ -23,7 +24,7 @@ export class FlightSearchComponent implements OnInit {
     5: true,
   };
 
-  readonly flights$ = this.store.select((state) => state.flightBooking.flights);
+  readonly flights$ = this.store.select(selectFilteredFlights);
 
   constructor(
     private flightService: FlightService,
@@ -53,7 +54,7 @@ export class FlightSearchComponent implements OnInit {
 
   delay(): void {
     // this.flightService.delay();
-    
+
     this.flights$.pipe(take(1)).subscribe((flights) => {
       const flight = flights[0];
 
