@@ -1,3 +1,4 @@
+import { routerReducer } from '@ngrx/router-store';
 import {
   ActionReducer,
   ActionReducerMap,
@@ -13,7 +14,7 @@ export interface State {
 }
 
 export const reducers: ActionReducerMap<State> = {
-
+  router: routerReducer
 };
 
 
