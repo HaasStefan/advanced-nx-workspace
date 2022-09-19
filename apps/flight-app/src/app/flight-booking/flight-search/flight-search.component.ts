@@ -2,12 +2,20 @@ import { Component, OnInit } from '@angular/core';
 import { FlightService } from '@flight-workspace/flight-lib';
 import { Store } from '@ngrx/store';
 import { take } from 'rxjs';
-import { flightsLoaded, updateFlight } from '../+state/flight-booking.actions';
+import {
+  flightsLoaded,
+  loadFlight,
+  updateFlight,
+} from '../+state/flight-booking.actions';
 import {
   FlightBookingAppState,
   flightBookingFeatureKey,
 } from '../+state/flight-booking.reducer';
-import { selectFilteredFlights, selectFlightsWithParams } from '../+state/flight-booking.selectors';
+import {
+  selectFilteredFlights,
+  selectFlights,
+  selectFlightsWithParams,
+} from '../+state/flight-booking.selectors';
 
 @Component({
   selector: 'flight-search',
@@ -24,11 +32,10 @@ export class FlightSearchComponent implements OnInit {
     5: true,
   };
 
-  // readonly flights$ = this.store.select(selectFilteredFlights);
-  readonly flights$ = this.store.select(selectFlightsWithParams(3));
+  readonly flights$ = this.store.select(selectFlights);
 
   constructor(
-    private flightService: FlightService,
+    // private flightService: FlightService,
     private store: Store<FlightBookingAppState>
   ) {}
 
@@ -39,18 +46,23 @@ export class FlightSearchComponent implements OnInit {
   search(): void {
     if (!this.from || !this.to) return;
 
-    // this.flightService
-    //   .load(this.from, this.to, this.urgent);
+    // NEW:
+
+    this.store.dispatch(
+      loadFlight({ from: this.from, to: this.to, urgent: this.urgent })
+    );
+
+    // OLD:
 
     // dispatch flights
-    this.flightService
-      .find(this.from, this.to, this.urgent)
-      .subscribe((flights) => {
-        this.store.dispatch(flightsLoaded({ flights }));
-
-        // reminder:
-        // {flights} <===> {flights: flights}
-      });
+    // this.flightService
+    //   .find(this.from, this.to, this.urgent)
+    //   .subscribe((flights) => {
+    //     this.store.dispatch(flightsLoaded({ flights }));
+    //
+    //     // reminder:
+    //     // {flights} <===> {flights: flights}
+    //   });
   }
 
   delay(): void {

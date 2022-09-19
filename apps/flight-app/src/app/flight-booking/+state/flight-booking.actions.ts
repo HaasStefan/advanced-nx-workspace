@@ -25,3 +25,9 @@ export const normalizeFlightDto = createAction(
   '[FlightBooking] NormalizeFlightDto',
   props<{ flightDto: FligthDto }>()
 );
+
+
+export const loadFlight = createAction(
+  '[FlightBooking] LoadFlight',
+  props<{ from: string, to: string, urgent: boolean }>()
+);
