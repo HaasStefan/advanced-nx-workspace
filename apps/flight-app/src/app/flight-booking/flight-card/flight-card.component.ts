@@ -2,6 +2,8 @@
 /* eslint-disable @angular-eslint/no-empty-lifecycle-method */
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import {
+  ChangeDetectionStrategy,
+  ChangeDetectorRef,
   Component,
   ElementRef,
   EventEmitter,
@@ -14,16 +16,21 @@ import {
   SimpleChanges,
 } from '@angular/core';
 import { Flight } from '@flight-workspace/flight-lib';
+import { filter, interval, tap } from 'rxjs';
 
 @Component({
   selector: 'flight-card',
   templateUrl: './flight-card.component.html',
-  // changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class FlightCardComponent implements OnInit, OnChanges, OnDestroy {
-  @Input() item: Flight | undefined;
+  @Input() item: Flight | undefined; // delay must be immutable!
   @Input() selected: boolean | undefined;
   @Output() selectedChange = new EventEmitter<boolean>();
+
+  get someProperty() {
+    return Math.random();
+  }
 
   constructor(private element: ElementRef, private zone: NgZone) {}
 
@@ -53,7 +60,10 @@ export class FlightCardComponent implements OnInit, OnChanges, OnDestroy {
       });
 
       setTimeout(() => {
-        this.element.nativeElement.firstChild.style.backgroundColor = this.selected ? 'rgb(204, 197, 185)' : 'white';
+        this.element.nativeElement.firstChild.style.backgroundColor = this
+          .selected
+          ? 'rgb(204, 197, 185)'
+          : 'white';
       }, 1000);
     });
 
