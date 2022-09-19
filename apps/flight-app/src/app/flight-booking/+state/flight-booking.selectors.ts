@@ -20,3 +20,8 @@ export const selectFilteredFlights = createSelector(
   selectBlacklist,
   (flights, blackList) => flights.filter(f => !blackList.includes(f.id))
 )
+
+export const selectFlightsWithParams = (id: number) => createSelector(
+  selectFlights,
+  (flights) => flights.filter(f => f.id === id)
+);

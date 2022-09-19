@@ -7,7 +7,7 @@ import {
   FlightBookingAppState,
   flightBookingFeatureKey,
 } from '../+state/flight-booking.reducer';
-import { selectFilteredFlights } from '../+state/flight-booking.selectors';
+import { selectFilteredFlights, selectFlightsWithParams } from '../+state/flight-booking.selectors';
 
 @Component({
   selector: 'flight-search',
@@ -24,7 +24,8 @@ export class FlightSearchComponent implements OnInit {
     5: true,
   };
 
-  readonly flights$ = this.store.select(selectFilteredFlights);
+  // readonly flights$ = this.store.select(selectFilteredFlights);
+  readonly flights$ = this.store.select(selectFlightsWithParams(3));
 
   constructor(
     private flightService: FlightService,
