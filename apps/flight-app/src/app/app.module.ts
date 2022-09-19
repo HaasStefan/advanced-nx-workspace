@@ -19,7 +19,8 @@ import { SidebarComponent } from './sidebar/sidebar.component';
   imports: [
     BrowserModule,
     HttpClientModule,
-    FlightBookingModule,
+    // Do not import Lazy Loaded Modules!!!
+    // FlightBookingModule,
 
     BrowserAnimationsModule,
     FlightCancellingModule,
