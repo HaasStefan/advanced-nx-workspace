@@ -1,10 +1,11 @@
 import { Injectable } from '@angular/core';
 import { FlightService } from '@flight-workspace/flight-lib';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
-import { map, Observable, of, switchMap } from 'rxjs';
+import { catchError, map, Observable, of, switchMap } from 'rxjs';
 import { FligthDto, PassengerDto, TicketDto } from './enities';
 import {
   flightsLoaded,
+  flightsLoadedError,
   loadFlight,
   loadFlightDto,
   normalizeFlightDto,
@@ -16,9 +17,11 @@ export class FlightBookingEffects {
     this.actions$.pipe(
       ofType(loadFlight),
       switchMap((action) =>
-        this.flightService.find(action.from, action.to, action.urgent)
-      ),
-      map((flights) => flightsLoaded({ flights }))
+        this.flightService.find(action.from, action.to, action.urgent).pipe(
+            map((flights) => flightsLoaded({ flights })),
+            catchError(error => of(flightsLoadedError({error})))
+        )
+      )
     )
   );
 
