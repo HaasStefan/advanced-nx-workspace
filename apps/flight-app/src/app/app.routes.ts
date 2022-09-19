@@ -19,7 +19,11 @@ export const APP_ROUTES: Routes = [
   },
   {
     path: 'flight-booking',
-    loadChildren: () => import('./flight-booking/flight-booking.module').then(m => m.FlightBookingModule)
+    loadChildren: () => import('./flight-booking/flight-booking.module').then(m => m.FlightBookingModule),
+    data: {
+      preload: true,
+      delay: true
+    }
   },
   {
     path: '**',

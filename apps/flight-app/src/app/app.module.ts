@@ -14,6 +14,7 @@ import { HomeComponent } from './home/home.component';
 import { NavbarComponent } from './navbar/navbar.component';
 import { SharedModule } from './shared/shared.module';
 import { SidebarComponent } from './sidebar/sidebar.component';
+import { CustomPreloadingStrategy } from './custom-preloading';
 
 @NgModule({
   imports: [
@@ -27,7 +28,7 @@ import { SidebarComponent } from './sidebar/sidebar.component';
 
     FlightLibModule.forRoot(),
     SharedModule.forRoot(),
-    RouterModule.forRoot(APP_ROUTES, { preloadingStrategy: PreloadAllModules }),
+    RouterModule.forRoot(APP_ROUTES, { preloadingStrategy: CustomPreloadingStrategy }),
   ],
   declarations: [
     AppComponent,
@@ -36,7 +37,7 @@ import { SidebarComponent } from './sidebar/sidebar.component';
     HomeComponent,
     BasketComponent,
   ],
-  providers: [],
+  providers: [CustomPreloadingStrategy],
   bootstrap: [AppComponent],
 })
 export class AppModule {}
