@@ -11,7 +11,8 @@ sharedMappings.register(
 module.exports = {
   output: {
     uniqueName: "flightApp",
-    publicPath: "auto"
+    publicPath: "auto",
+    scriptType: 'text/javascript' // import.meta
   },
   optimization: {
     runtimeChunk: false
