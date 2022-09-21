@@ -26,23 +26,12 @@ module.exports = {
   },
   plugins: [
     new ModuleFederationPlugin({
-        library: { type: "module" },
-
-        // For remotes (please adjust)
-        // name: "flightApp",
-        // filename: "remoteEntry.js",
-        // exposes: {
-        //     './Component': './apps/flight-app/src/app/app.component.ts',
-        // },        
+        library: { type: "module" }, 
         
         // For hosts (please adjust)
-        // remotes: {
-        //     "dashboard": "http://localhost:4200/remoteEntry.js",
-        //     "external": "http://localhost:4200/remoteEntry.js",
-        //     "flightAdmin": "http://localhost:4200/remoteEntry.js",
-        //     "passenger": "http://localhost:3000/remoteEntry.js",
-
-        // },
+        remotes: {
+            "passenger": "http://localhost:3000/remoteEntry.js",
+        },
 
         shared: share({
           "@angular/core": { singleton: true, strictVersion: true, requiredVersion: 'auto' }, 
