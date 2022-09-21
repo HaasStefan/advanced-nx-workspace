@@ -22,9 +22,10 @@ export default async function (tree: Tree, options: MyPluginGeneratorSchema) {
   const libsDir = getWorkspaceLayout(tree).libsDir;
   const projectRoot = `${libsDir}/${options.name}`;
   
-  const entityFileName = names(options.entity).fileName;
-  const entityClassName = names(options.entity).className;
+  const entityFileName = names(options.entity).fileName;    // flight-ticket
+  const entityClassName = names(options.entity).className;  // FlightTicket
 
+  // placeholders in the template files get replaced:
   const templateOptions = {
     entityFileName,
     entityClassName,

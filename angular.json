@@ -4,6 +4,7 @@
     "dashboard": "apps/dashboard",
     "dashboard-e2e": "apps/dashboard-e2e",
     "dashboard-lib": "libs/dashboard-lib",
+    "demo-data-access": "libs/demo-data-access",
     "external": "apps/external",
     "external-e2e": "apps/external-e2e",
     "flight-admin": "apps/flight-admin",
