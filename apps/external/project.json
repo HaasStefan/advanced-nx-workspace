@@ -5,15 +5,22 @@
   "targets": {
     "build": {
       "executor": "@angular-devkit/build-angular:browser",
-      "outputs": ["{options.outputPath}"],
+      "outputs": [
+        "{options.outputPath}"
+      ],
       "options": {
         "outputPath": "dist/apps/external",
         "index": "apps/external/src/index.html",
         "main": "apps/external/src/main.ts",
         "polyfills": "apps/external/src/polyfills.ts",
         "tsConfig": "apps/external/tsconfig.app.json",
-        "assets": ["apps/external/src/favicon.ico", "apps/external/src/assets"],
-        "styles": ["apps/external/src/styles.css"],
+        "assets": [
+          "apps/external/src/favicon.ico",
+          "apps/external/src/assets"
+        ],
+        "styles": [
+          "apps/external/src/styles.css"
+        ],
         "scripts": []
       },
       "configurations": {
@@ -78,12 +85,17 @@
     },
     "test": {
       "executor": "@nrwl/jest:jest",
-      "outputs": ["coverage/apps/external"],
+      "outputs": [
+        "coverage/apps/external"
+      ],
       "options": {
         "jestConfig": "apps/external/jest.config.ts",
         "passWithNoTests": true
       }
     }
   },
-  "tags": ["type:app", "domain:external"]
+  "tags": [
+    "type:app",
+    "domain:external"
+  ]
 }
