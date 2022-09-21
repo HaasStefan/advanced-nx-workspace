@@ -6,19 +6,24 @@ export const APP_ROUTES: Routes = [
   {
     path: '',
     redirectTo: 'home',
-    pathMatch: 'full'
+    pathMatch: 'full',
   },
   {
     path: 'home',
-    component: HomeComponent
+    component: HomeComponent,
   },
   {
     path: 'basket',
     component: BasketComponent,
-    outlet: 'aux'
+    outlet: 'aux',
+  },
+  {
+    path: 'passenger',
+    loadChildren: () =>
+      import('passenger/Module').then((m) => m.PassengerModule),
   },
   {
     path: '**',
-    redirectTo: 'home'
-  }
+    redirectTo: 'home',
+  },
 ];
