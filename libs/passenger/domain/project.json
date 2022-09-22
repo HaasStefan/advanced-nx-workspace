@@ -5,9 +5,7 @@
   "targets": {
     "build": {
       "executor": "@nrwl/angular:ng-packagr-lite",
-      "outputs": [
-        "dist/libs/passenger/domain"
-      ],
+      "outputs": ["dist/libs/passenger/domain"],
       "options": {
         "project": "libs/passenger/domain/ng-package.json"
       },
@@ -23,9 +21,7 @@
     },
     "test": {
       "executor": "@nrwl/jest:jest",
-      "outputs": [
-        "coverage/libs/passenger/domain"
-      ],
+      "outputs": ["coverage/libs/passenger/domain"],
       "options": {
         "jestConfig": "libs/passenger/domain/jest.config.ts",
         "passWithNoTests": true
@@ -41,8 +37,5 @@
       }
     }
   },
-  "tags": [
-    "type:domain-logic",
-    "domain:passenger"
-  ]
+  "tags": ["type:domain-logic", "domain:passenger"]
 }

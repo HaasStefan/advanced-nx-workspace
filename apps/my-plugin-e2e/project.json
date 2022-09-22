@@ -12,7 +12,5 @@
     }
   },
   "tags": [],
-  "implicitDependencies": [
-    "my-plugin"
-  ]
+  "implicitDependencies": ["my-plugin"]
 }

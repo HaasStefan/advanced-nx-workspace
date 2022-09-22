@@ -5,9 +5,7 @@
   "targets": {
     "build": {
       "executor": "@nrwl/angular:ng-packagr-lite",
-      "outputs": [
-        "dist/libs/passenger/feature-search"
-      ],
+      "outputs": ["dist/libs/passenger/feature-search"],
       "options": {
         "project": "libs/passenger/feature-search/ng-package.json"
       },
@@ -23,9 +21,7 @@
     },
     "test": {
       "executor": "@nrwl/jest:jest",
-      "outputs": [
-        "coverage/libs/passenger/feature-search"
-      ],
+      "outputs": ["coverage/libs/passenger/feature-search"],
       "options": {
         "jestConfig": "libs/passenger/feature-search/jest.config.ts",
         "passWithNoTests": true
@@ -41,8 +37,5 @@
       }
     }
   },
-  "tags": [
-    "type:feature",
-    "domain:passenger"
-  ]
+  "tags": ["type:feature", "domain:passenger"]
 }
