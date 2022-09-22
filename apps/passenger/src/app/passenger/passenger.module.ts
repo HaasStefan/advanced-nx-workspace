@@ -3,7 +3,6 @@ import { CommonModule } from '@angular/common';
 import { RouterModule, Routes } from '@angular/router';
 import { PassengerComponent } from './passenger.component';
 
-
 const routes: Routes = [
   {
     path: '',
@@ -36,4 +35,5 @@ const routes: Routes = [
     RouterModule.forChild(routes)
   ]
 })
-export class PassengerModule { }
+export class PassengerModule {
+ }

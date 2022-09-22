@@ -18,6 +18,7 @@
     "passenger-domain": "libs/passenger/domain",
     "passenger-e2e": "apps/passenger-e2e",
     "passenger-feature-edit": "libs/passenger/feature-edit",
-    "passenger-feature-search": "libs/passenger/feature-search"
+    "passenger-feature-search": "libs/passenger/feature-search",
+    "shared-util-auth": "libs/shared/util-auth"
   }
 }
