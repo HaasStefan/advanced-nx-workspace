@@ -35,7 +35,8 @@
     "@angular/router": "14.0.2",
     "@ngrx/component": "14.0.0",
     "@ngrx/effects": "14.0.0",
-    "@ngrx/router-store": "^14.0.2",
+    "@ngrx/entity": "14.0.0",
+    "@ngrx/router-store": "14.0.0",
     "@ngrx/schematics": "14.0.0",
     "@ngrx/store": "14.0.0",
     "@ngrx/store-devtools": "14.0.0",
@@ -52,7 +53,7 @@
   },
   "devDependencies": {
     "@angular-architects/ddd": "2.1.2",
-    "@angular-architects/module-federation": "14.3.8",
+    "@angular-architects/module-federation": "^14.3.8",
     "@angular-devkit/build-angular": "14.0.2",
     "@angular-eslint/eslint-plugin": "13.2.1",
     "@angular-eslint/eslint-plugin-template": "13.2.1",
