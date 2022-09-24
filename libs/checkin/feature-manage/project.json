@@ -1,0 +1,25 @@
+{
+  "projectType": "library",
+  "sourceRoot": "libs/checkin/feature-manage/src",
+  "prefix": "checkin",
+  "targets": {
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["coverage/libs/checkin/feature-manage"],
+      "options": {
+        "jestConfig": "libs/checkin/feature-manage/jest.config.ts",
+        "passWithNoTests": true
+      }
+    },
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "options": {
+        "lintFilePatterns": [
+          "libs/checkin/feature-manage/**/*.ts",
+          "libs/checkin/feature-manage/**/*.html"
+        ]
+      }
+    }
+  },
+  "tags": ["domain:checkin", "type:feature"]
+}
