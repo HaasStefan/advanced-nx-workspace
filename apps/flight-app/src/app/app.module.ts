@@ -20,6 +20,7 @@ import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { environment } from '../environments/environment';
 import { EffectsModule } from '@ngrx/effects';
 import { RouterState, StoreRouterConnectingModule } from '@ngrx/router-store';
+import { PassengerModule } from './passenger/passenger.module';
 
 @NgModule({
   imports: [
@@ -29,6 +30,8 @@ import { RouterState, StoreRouterConnectingModule } from '@ngrx/router-store';
 
     BrowserAnimationsModule,
     FlightCancellingModule,
+
+    PassengerModule,
 
     FlightLibModule.forRoot(),
     SharedModule.forRoot(),
