@@ -1,5 +1,6 @@
 import { HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Luggage } from '@flight-workspace/luggage/api-abc';
 import { Observable, of, throwError } from 'rxjs';
 import { Flight } from '../models/flight';
 import { fakeFlights } from './fake-flight.data';
@@ -9,6 +10,7 @@ import { fakeFlights } from './fake-flight.data';
 })
 export class FakeFlightService {
   flights: Flight[] = [];
+  luggage!: Luggage;
 
   load(from: string, to: string, urgent: boolean): void {
     this.find(from, to, urgent).subscribe({
