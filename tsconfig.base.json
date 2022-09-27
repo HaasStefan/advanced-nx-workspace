@@ -8,17 +8,28 @@
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
     "importHelpers": true,
-    "target": "es2015",
+    "target": "es2020",
     "module": "esnext",
-    "lib": ["es2017", "dom"],
+    "lib": [
+      "es2017",
+      "dom"
+    ],
     "skipLibCheck": true,
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
     "paths": {
-      "@flight-workspace/dashboard-lib": ["libs/dashboard-lib/src/index.ts"],
-      "@flight-workspace/flight-lib": ["libs/flight-lib/src/index.ts"],
-      "@flight-workspace/logger-lib": ["libs/logger-lib/src/index.ts"],
-      "@flight-workspace/my-plugin": ["libs/my-plugin/src/index.ts"],
+      "@flight-workspace/dashboard-lib": [
+        "libs/dashboard-lib/src/index.ts"
+      ],
+      "@flight-workspace/flight-lib": [
+        "libs/flight-lib/src/index.ts"
+      ],
+      "@flight-workspace/logger-lib": [
+        "libs/logger-lib/src/index.ts"
+      ],
+      "@flight-workspace/my-plugin": [
+        "libs/my-plugin/src/index.ts"
+      ],
       "@flight-workspace/passenger/domain": [
         "libs/passenger/domain/src/index.ts"
       ],
@@ -30,5 +41,8 @@
       ]
     }
   },
-  "exclude": ["node_modules", "tmp"]
+  "exclude": [
+    "node_modules",
+    "tmp"
+  ]
 }

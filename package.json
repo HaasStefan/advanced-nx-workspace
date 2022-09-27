@@ -18,10 +18,12 @@
     "affected:test": "nx affected:test",
     "affected:lint": "nx affected:lint",
     "affected:dep-graph": "nx affected:dep-graph",
-    "affected": "nx affected"
+    "affected": "nx affected",
+    "run:all": "node node_modules/@angular-architects/module-federation/src/server/mf-dev-server.js"
   },
   "private": true,
   "dependencies": {
+    "@angular-architects/module-federation-tools": "^14.3.10",
     "@angular/animations": "14.0.2",
     "@angular/cdk": "14.0.2",
     "@angular/common": "14.0.2",

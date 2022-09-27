@@ -5,7 +5,9 @@
   "targets": {
     "build": {
       "executor": "@angular-devkit/build-angular:browser",
-      "outputs": ["{options.outputPath}"],
+      "outputs": [
+        "{options.outputPath}"
+      ],
       "options": {
         "outputPath": "dist/apps/flight-admin",
         "index": "apps/flight-admin/src/index.html",
@@ -16,7 +18,9 @@
           "apps/flight-admin/src/favicon.ico",
           "apps/flight-admin/src/assets"
         ],
-        "styles": ["apps/flight-admin/src/styles.css"],
+        "styles": [
+          "apps/flight-admin/src/styles.css"
+        ],
         "scripts": []
       },
       "configurations": {
@@ -81,12 +85,17 @@
     },
     "test": {
       "executor": "@nrwl/jest:jest",
-      "outputs": ["coverage/apps/flight-admin"],
+      "outputs": [
+        "coverage/apps/flight-admin"
+      ],
       "options": {
         "jestConfig": "apps/flight-admin/jest.config.ts",
         "passWithNoTests": true
       }
     }
   },
-  "tags": ["type:app", "domain:flights"]
+  "tags": [
+    "type:app",
+    "domain:flights"
+  ]
 }

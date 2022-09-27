@@ -4,7 +4,9 @@
   "targets": {
     "build": {
       "executor": "@nrwl/js:tsc",
-      "outputs": ["{options.outputPath}"],
+      "outputs": [
+        "{options.outputPath}"
+      ],
       "options": {
         "outputPath": "dist/libs/my-plugin",
         "main": "libs/my-plugin/src/index.ts",
@@ -36,14 +38,20 @@
     },
     "lint": {
       "executor": "@nrwl/linter:eslint",
-      "outputs": ["{options.outputFile}"],
+      "outputs": [
+        "{options.outputFile}"
+      ],
       "options": {
-        "lintFilePatterns": ["libs/my-plugin/**/*.ts"]
+        "lintFilePatterns": [
+          "libs/my-plugin/**/*.ts"
+        ]
       }
     },
     "test": {
       "executor": "@nrwl/jest:jest",
-      "outputs": ["coverage/libs/my-plugin"],
+      "outputs": [
+        "coverage/libs/my-plugin"
+      ],
       "options": {
         "jestConfig": "libs/my-plugin/jest.config.ts",
         "passWithNoTests": true
