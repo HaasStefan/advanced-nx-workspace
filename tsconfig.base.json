@@ -27,6 +27,9 @@
       ],
       "@flight-workspace/passenger/feature-search": [
         "libs/passenger/feature-search/src/index.ts"
+      ],
+      "@flight-workspace/shared/util-rxjs-operators": [
+        "libs/shared/util-rxjs-operators/src/index.ts"
       ]
     }
   },

@@ -2,6 +2,7 @@ import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { Flight } from '@flight-workspace/flight-lib';
+import { lookAhead } from '@flight-workspace/shared/util-rxjs-operators';
 import {
   BehaviorSubject,
   catchError,
@@ -58,7 +59,7 @@ export class FlightLookaheadComponent implements OnInit {
 
     const input$ = this.control.valueChanges.pipe(
       filter((value) => value.length > 2),
-      debounceTime(300)
+      lookAhead(300)
     );
 
     this.flights$ = combineLatest({

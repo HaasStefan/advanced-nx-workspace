@@ -16,6 +16,7 @@ import { SharedModule } from './shared/shared.module';
 import { SidebarComponent } from './sidebar/sidebar.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { FlightLookaheadComponent } from './flight-lookahead/flight-lookahead.component';
+import { FreezeUntilComponent } from './freeze-until/freeze-until.component';
 
 @NgModule({
   imports: [
@@ -30,7 +31,7 @@ import { FlightLookaheadComponent } from './flight-lookahead/flight-lookahead.co
     SharedModule.forRoot(),
     RouterModule.forRoot(APP_ROUTES),
 
-    ReactiveFormsModule
+    ReactiveFormsModule,
   ],
   declarations: [
     AppComponent,
@@ -38,9 +39,10 @@ import { FlightLookaheadComponent } from './flight-lookahead/flight-lookahead.co
     NavbarComponent,
     HomeComponent,
     BasketComponent,
-    FlightLookaheadComponent
+    FlightLookaheadComponent,
+    FreezeUntilComponent,
   ],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
 export class AppModule {}
