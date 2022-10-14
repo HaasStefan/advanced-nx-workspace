@@ -15,6 +15,10 @@
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
     "paths": {
+      "@flight-workspace/checkin/domain": ["libs/checkin/domain/src/index.ts"],
+      "@flight-workspace/checkin/feature-manage": [
+        "libs/checkin/feature-manage/src/index.ts"
+      ],
       "@flight-workspace/dashboard-lib": ["libs/dashboard-lib/src/index.ts"],
       "@flight-workspace/demo-data-access": [
         "libs/demo-data-access/src/index.ts"

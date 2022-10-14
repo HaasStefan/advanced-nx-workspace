@@ -59,7 +59,7 @@ export class FlightService {
     return this.http.post<Flight>(url, flight);
   }
 
-  delay() {
+delay() {
     const ONE_MINUTE = 1000 * 60;
 
     const oldFlights = this.flights;
@@ -67,7 +67,13 @@ export class FlightService {
     const oldDate = new Date(oldFlight.date);
 
     // Mutable
-    oldDate.setTime(oldDate.getTime() + 15 * ONE_MINUTE);
-    oldFlight.date = oldDate.toISOString();
+    // oldDate.setTime(oldDate.getTime() + 15 * ONE_MINUTE );
+    // oldFlight.date = oldDate.toISOString();
+
+    // Immutable
+    const newDate = new Date(oldDate.getTime() + 15 * ONE_MINUTE);
+    const newFlight: Flight = { ...oldFlight, date: newDate.toISOString() };
+    const newFlights = [ newFlight, ...oldFlights.slice(1) ]
+    this.flights = newFlights;
   }
 }
