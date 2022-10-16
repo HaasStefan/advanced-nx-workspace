@@ -1,7 +1,7 @@
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
-import { Flight } from '@flight-workspace/flight-lib';
+import { CachedFlightService, Flight } from '@flight-workspace/flight-lib';
 import { lookAhead } from '@flight-workspace/shared/util-rxjs-operators';
 import {
   BehaviorSubject,
@@ -42,7 +42,8 @@ export class FlightLookaheadComponent implements OnInit {
   loading$ = this.loadingSubject.asObservable();
   online$!: Observable<boolean>;
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient,
+    private flightService: CachedFlightService) {}
 
   ngOnInit(): void {
     this.control = new FormControl();
@@ -68,31 +69,12 @@ export class FlightLookaheadComponent implements OnInit {
     }).pipe(
       filter(({ online }) => online),
       tap(() => this.loadingSubject.next(true)),
-      // switchMap(({ input }) => this.load(input).pipe(
-      // exhaustMap(({ input }) => this.load(input).pipe(
-      // concatMap(({ input }) => this.load(input).pipe(
-      mergeMap(({ input }) => this.load(input).pipe(
-        delay(7000)
-      )),
+      switchMap(({ input }) => this.load(input)),
       tap(() => this.loadingSubject.next(false))
     );
   }
 
   load(from: string): Observable<Flight[]> {
-    const url = 'http://www.angular.at/api/flight';
-
-    const params = new HttpParams().set('from', from);
-
-    // If you use json-server, use the parameter from_like:
-    // const params = new HttpParams().set('from_like', from);
-
-    const headers = new HttpHeaders().set('Accept', 'application/json');
-
-    return this.http.get<Flight[]>(url, { params, headers }).pipe(
-      catchError((error) => {
-        console.error('error', error);
-        return of([]);
-      })
-    );
+    return this.flightService.load(from);
   }
 }
