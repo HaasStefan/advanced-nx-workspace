@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FlightService } from '@flight-workspace/flight-lib';
+import { FlightService, FlightStore } from '@flight-workspace/flight-lib';
 import { Store } from '@ngrx/store';
 import { take } from 'rxjs';
 import {
@@ -21,6 +21,7 @@ import {
   selector: 'flight-search',
   templateUrl: './flight-search.component.html',
   styleUrls: ['./flight-search.component.css'],
+  providers: [FlightStore],
 })
 export class FlightSearchComponent implements OnInit {
   from = 'Hamburg'; // in Germany
@@ -32,11 +33,11 @@ export class FlightSearchComponent implements OnInit {
     5: true,
   };
 
-  readonly flights$ = this.store.select(selectFlights);
+  readonly flights$ = this.store.flights$;
 
   constructor(
     // private flightService: FlightService,
-    private store: Store<FlightBookingAppState>
+    private store: FlightStore
   ) {}
 
   ngOnInit() {
@@ -46,36 +47,20 @@ export class FlightSearchComponent implements OnInit {
   search(): void {
     if (!this.from || !this.to) return;
 
-    // NEW:
-
-    this.store.dispatch(
-      loadFlight({ from: this.from, to: this.to, urgent: this.urgent })
-    );
-
-    // OLD:
-
-    // dispatch flights
-    // this.flightService
-    //   .find(this.from, this.to, this.urgent)
-    //   .subscribe((flights) => {
-    //     this.store.dispatch(flightsLoaded({ flights }));
-    //
-    //     // reminder:
-    //     // {flights} <===> {flights: flights}
-    //   });
+    this.store.load({ from: this.from, to: this.to, urgent: this.urgent });
   }
 
   delay(): void {
-    // this.flightService.delay();
+    this.store.delay();
 
-    this.flights$.pipe(take(1)).subscribe((flights) => {
-      const flight = flights[0];
-
-      const oldDate = new Date(flight.date);
-      const newDate = new Date(oldDate.getTime() + 15 * 60 * 1000);
-      const newFlight = { ...flight, date: newDate.toISOString() };
-
-      this.store.dispatch(updateFlight({ flight: newFlight }));
-    });
+    // this.flights$.pipe(take(1)).subscribe((flights) => {
+    //   const flight = flights[0];
+ 
+    //   const oldDate = new Date(flight.date);
+    //   const newDate = new Date(oldDate.getTime() + 15 * 60 * 1000);
+    //   const newFlight = { ...flight, date: newDate.toISOString() };
+ 
+    //   this.store.dispatch(updateFlight({ flight: newFlight }));
+    // });
   }
 }
