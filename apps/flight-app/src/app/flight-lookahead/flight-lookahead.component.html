@@ -1,0 +1,33 @@
+<div class="card">
+    <div class="header">
+      <h1 class="title">Lookahead</h1>
+    </div>
+  
+    <div class="content">
+      <div class="control-group">
+        <label>City</label>
+        <input [formControl]="control" class="form-control" />
+      </div>
+  
+      <div *ngIf="loading">Loading ...</div>
+    </div>
+  
+    <table class="table table-striped">
+      <thead>
+          <tr>
+              <th>Id</th>
+              <th>From</th>
+              <th>To</th>
+              <th>Date</th>
+          </tr>
+      </thead>
+     <tbody>
+      <tr *ngFor="let f of flights$ | async">
+          <td>{{ f.id }}</td>
+          <td>{{ f.from }}</td>
+          <td>{{ f.to }}</td>
+          <td>{{ f.date | date: 'dd.MM.yyyy HH:mm' }}</td>
+        </tr>
+     </tbody>
+    </table>
+  </div>
