@@ -88,7 +88,6 @@ export class CustomCheckboxElement extends HTMLElement {
       this.checked = !this.checked;
 
       // TODO: Dispatch a changed event with detail: this.checked here.
-      this.dispatchEvent(new CustomEvent('changed', { detail: this.checked }));
     };
 
     checkbox.addEventListener('click', this._clicked);
