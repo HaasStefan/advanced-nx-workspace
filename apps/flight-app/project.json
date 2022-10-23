@@ -4,8 +4,10 @@
   "prefix": "flight-workspace",
   "targets": {
     "build": {
-      "executor": "@angular-devkit/build-angular:browser",
-      "outputs": ["{options.outputPath}"],
+      "executor": "ngx-build-plus:browser",
+      "outputs": [
+        "{options.outputPath}"
+      ],
       "options": {
         "outputPath": "dist/apps/flight-app",
         "index": "apps/flight-app/src/index.html",
@@ -59,7 +61,7 @@
       "defaultConfiguration": "production"
     },
     "serve": {
-      "executor": "@angular-devkit/build-angular:dev-server",
+      "executor": "ngx-build-plus:dev-server",
       "configurations": {
         "production": {
           "browserTarget": "flight-app:build:production"
@@ -71,7 +73,7 @@
       "defaultConfiguration": "development"
     },
     "extract-i18n": {
-      "executor": "@angular-devkit/build-angular:extract-i18n",
+      "executor": "ngx-build-plus:extract-i18n",
       "options": {
         "browserTarget": "flight-app:build"
       }
@@ -86,13 +88,18 @@
       }
     },
     "test": {
-      "executor": "@nrwl/jest:jest",
-      "outputs": ["coverage/apps/flight-app"],
+      "executor": "ngx-build-plus:karma",
+      "outputs": [
+        "coverage/apps/flight-app"
+      ],
       "options": {
         "jestConfig": "apps/flight-app/jest.config.ts",
         "passWithNoTests": true
       }
     }
   },
-  "tags": ["type:app", "domain:flights"]
+  "tags": [
+    "type:app",
+    "domain:flights"
+  ]
 }

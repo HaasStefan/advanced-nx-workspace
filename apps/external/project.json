@@ -4,16 +4,23 @@
   "prefix": "flight-workspace",
   "targets": {
     "build": {
-      "executor": "@angular-devkit/build-angular:browser",
-      "outputs": ["{options.outputPath}"],
+      "executor": "ngx-build-plus:browser",
+      "outputs": [
+        "{options.outputPath}"
+      ],
       "options": {
         "outputPath": "dist/apps/external",
         "index": "apps/external/src/index.html",
         "main": "apps/external/src/main.ts",
         "polyfills": "apps/external/src/polyfills.ts",
         "tsConfig": "apps/external/tsconfig.app.json",
-        "assets": ["apps/external/src/favicon.ico", "apps/external/src/assets"],
-        "styles": ["apps/external/src/styles.css"],
+        "assets": [
+          "apps/external/src/favicon.ico",
+          "apps/external/src/assets"
+        ],
+        "styles": [
+          "apps/external/src/styles.css"
+        ],
         "scripts": []
       },
       "configurations": {
@@ -50,7 +57,7 @@
       "defaultConfiguration": "production"
     },
     "serve": {
-      "executor": "@angular-devkit/build-angular:dev-server",
+      "executor": "ngx-build-plus:dev-server",
       "configurations": {
         "production": {
           "browserTarget": "external:build:production"
@@ -62,7 +69,7 @@
       "defaultConfiguration": "development"
     },
     "extract-i18n": {
-      "executor": "@angular-devkit/build-angular:extract-i18n",
+      "executor": "ngx-build-plus:extract-i18n",
       "options": {
         "browserTarget": "external:build"
       }
@@ -77,13 +84,18 @@
       }
     },
     "test": {
-      "executor": "@nrwl/jest:jest",
-      "outputs": ["coverage/apps/external"],
+      "executor": "ngx-build-plus:karma",
+      "outputs": [
+        "coverage/apps/external"
+      ],
       "options": {
         "jestConfig": "apps/external/jest.config.ts",
         "passWithNoTests": true
       }
     }
   },
-  "tags": ["type:app", "domain:external"]
+  "tags": [
+    "type:app",
+    "domain:external"
+  ]
 }

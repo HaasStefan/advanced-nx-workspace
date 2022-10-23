@@ -1,5 +1,4 @@
 {
-  "root": "apps/external-e2e",
   "sourceRoot": "apps/external-e2e/src",
   "projectType": "application",
   "targets": {
@@ -17,12 +16,18 @@
     },
     "lint": {
       "executor": "@nrwl/linter:eslint",
-      "outputs": ["{options.outputFile}"],
+      "outputs": [
+        "{options.outputFile}"
+      ],
       "options": {
-        "lintFilePatterns": ["apps/external-e2e/**/*.{js,ts}"]
+        "lintFilePatterns": [
+          "apps/external-e2e/**/*.{js,ts}"
+        ]
       }
     }
   },
   "tags": [],
-  "implicitDependencies": ["external"]
+  "implicitDependencies": [
+    "external"
+  ]
 }

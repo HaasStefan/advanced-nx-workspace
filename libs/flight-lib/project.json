@@ -5,7 +5,9 @@
   "targets": {
     "build": {
       "executor": "@nrwl/angular:ng-packagr-lite",
-      "outputs": ["dist/libs/flight-lib"],
+      "outputs": [
+        "dist/libs/flight-lib"
+      ],
       "options": {
         "project": "libs/flight-lib/ng-package.json"
       },
@@ -21,7 +23,9 @@
     },
     "test": {
       "executor": "@nrwl/jest:jest",
-      "outputs": ["coverage/libs/flight-lib"],
+      "outputs": [
+        "coverage/libs/flight-lib"
+      ],
       "options": {
         "jestConfig": "libs/flight-lib/jest.config.ts",
         "passWithNoTests": true
@@ -37,5 +41,8 @@
       }
     }
   },
-  "tags": ["type:feature", "domain:flights"]
+  "tags": [
+    "type:feature",
+    "domain:flights"
+  ]
 }
