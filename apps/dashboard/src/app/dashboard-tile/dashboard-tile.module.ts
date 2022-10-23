@@ -20,7 +20,8 @@ import { DashboardTileComponent } from './dashboard-tile.component';
 export class DashboardTileModule {
 
   constructor(private injector: Injector) {
-    // TODO: Wrap DashboardTileComponent as a web component and register it
+    const ce = createCustomElement(DashboardTileComponent, {injector: this.injector});
+    customElements.define('dashboard-tile', ce);
   }
 
 }

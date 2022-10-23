@@ -8,4 +8,10 @@ import {Component, ViewEncapsulation} from '@angular/core';
 })
 export class HomeComponent {
   value1 = true;
+
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  onChanged(checked: any) {
+    this.value1 = checked.detail
+    console.log(checked.detail);
+  }
 }

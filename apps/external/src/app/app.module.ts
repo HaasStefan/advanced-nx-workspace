@@ -12,7 +12,7 @@ import { createCustomElement } from '@angular/elements';
    declarations: [
        ExternalDashboardTileComponent
    ],
-   bootstrap: []
+   bootstrap: [],
 })
 export class AppModule implements DoBootstrap { 
     constructor(private injector: Injector) {

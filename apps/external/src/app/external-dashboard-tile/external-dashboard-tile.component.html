@@ -5,18 +5,18 @@
   <div class="content">
     <div style="height:200px;">
       <br>
-      <table *ngIf="data$ | async as data" class="table table-contensed">
+      <table *ngIf="data$ | async as d" class="table table-contensed">
         <tr>
           <td>A</td>
-          <td>{{data.a}}</td>
+          <td>{{d.a}}</td>
         </tr>
         <tr>
           <td>B</td>
-          <td>{{data.b}}</td>
+          <td>{{d.b}}</td>
         </tr>
         <tr>
           <td>C</td>
-          <td>{{data.c}}</td>
+          <td>{{d.c}}</td>
         </tr>
       </table>
 

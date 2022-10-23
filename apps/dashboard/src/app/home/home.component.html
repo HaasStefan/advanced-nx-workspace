@@ -9,7 +9,9 @@
 
 </div>
 
-<!-- <custom-checkbox label="Option1" [checked]="value1" (changed)="changed($event)"></custom-checkbox>
+<!--<custom-checkbox label="Option1" [(checked)]="value1"></custom-checkbox>-->
 
-<span>Checked State: {{value1}}</span> -->
+<custom-checkbox label="Option1" [checked]="value1" (changed)="onChanged($event)"></custom-checkbox>
+
+<span>Checked State: {{value1}}</span>
 

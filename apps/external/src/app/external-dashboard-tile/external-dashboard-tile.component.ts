@@ -1,5 +1,5 @@
 import { HttpClient } from '@angular/common/http';
-import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Input, OnInit } from '@angular/core';
 import { ReplaySubject } from 'rxjs';
 
 export interface Data {
