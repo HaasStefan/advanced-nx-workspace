@@ -1,5 +1,4 @@
 {
-  "root": "apps/passenger-e2e",
   "sourceRoot": "apps/passenger-e2e/src",
   "projectType": "application",
   "targets": {
