@@ -11,12 +11,9 @@ export class ExternalDashboardTileService {
     if (this.loaded) return;
     this.loaded = true;
 
-    // TODO: Create a script element (document.createElement)
-    //       that points to 'assets/external-dashboard-tile.bundle.js'
-    //       and append it to document.body as a child element
-    //
-    // HINT: The goal is to dynamically add this to the end of the body:
-    //         <script src="..."></script>
+    const script = document.createElement('script');
+    script.src = 'assets/external-dashboard-tile.bundle.js';
+    document.body.appendChild(script);
   }
 
 }

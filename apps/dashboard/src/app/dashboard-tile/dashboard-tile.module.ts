@@ -19,8 +19,17 @@ import { DashboardTileComponent } from './dashboard-tile.component';
 })
 export class DashboardTileModule {
 
-  constructor(private injector: Injector) {
-    // TODO: Wrap DashboardTileComponent as a web component and register it
+  constructor(injector: Injector) {
+    const elem = createCustomElement(DashboardTileComponent, {injector});
+    customElements.define('dashboard-tile', elem);
   }
 
 }
+
+
+
+
+
+
+    // const tile = createCustomElement(DashboardTileComponent, {injector});
+    // customElements.define('dashboard-tile', tile);
