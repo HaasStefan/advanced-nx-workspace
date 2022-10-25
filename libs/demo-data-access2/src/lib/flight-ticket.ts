@@ -1,4 +1,4 @@
-export class <%=entityClassName%> {
+export class FlightTicket {
   id: string;
   title: string;
   description: string;
