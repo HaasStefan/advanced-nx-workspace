@@ -6,6 +6,7 @@
     "@angular/core": "^13.2.0"
   },
   "dependencies": {
+    "@ngrx/component-store": "^14.3.2",
     "tslib": "^2.3.0"
   }
 }

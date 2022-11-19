@@ -33,6 +33,10 @@
                   "domain:passenger",
                   "domain:shared"
                 ]
+              },
+              {
+                "sourceTag": "domain:checkin",
+                "onlyDependOnLibsWithTags": ["domain:checkin", "domain:shared"]
               }
             ]
           }

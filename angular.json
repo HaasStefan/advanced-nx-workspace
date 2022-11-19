@@ -1,6 +1,10 @@
 {
   "version": 2,
   "projects": {
+    "checkin": "apps/checkin",
+    "checkin-domain": "libs/checkin/domain",
+    "checkin-e2e": "apps/checkin-e2e",
+    "checkin-feature-manage": "libs/checkin/feature-manage",
     "dashboard": "apps/dashboard",
     "dashboard-e2e": "apps/dashboard-e2e",
     "dashboard-lib": "libs/dashboard-lib",
