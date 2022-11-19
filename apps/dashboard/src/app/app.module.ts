@@ -39,7 +39,7 @@ import { DashboardLibModule } from '@flight-workspace/dashboard-lib';
    ],
    providers: [],
    schemas: [
-      //TODO: Add CUSTOM_ELEMENTS_SCHEMA
+      CUSTOM_ELEMENTS_SCHEMA
    ],
    bootstrap: [
       AppComponent

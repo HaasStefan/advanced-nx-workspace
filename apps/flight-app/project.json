@@ -3,6 +3,12 @@
   "sourceRoot": "apps/flight-app/src",
   "prefix": "flight-workspace",
   "targets": {
+    "demo-executor": {
+      "executor": "@flight-workspace/my-plugin:build",
+      "options": {
+        "folder": "."
+      }
+    },
     "build": {
       "executor": "@angular-devkit/build-angular:browser",
       "outputs": ["{options.outputPath}"],

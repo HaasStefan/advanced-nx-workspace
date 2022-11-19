@@ -2,4 +2,5 @@ export class <%=entityClassName%> {
   id: string;
   title: string;
   description: string;
+  createdOn: Date;
 }
