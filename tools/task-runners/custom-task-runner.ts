@@ -1,7 +1,7 @@
-import { ProjectGraph } from '@nrwl/workspace/src/core/project-graph';
 import { DefaultTasksRunnerOptions, defaultTasksRunner, RemoteCache } from '@nrwl/workspace/src/tasks-runner/default-tasks-runner';
 import { Task, TasksRunner } from '@nrwl/workspace/src/tasks-runner/tasks-runner';
-import { NxJsonConfiguration } from '@nrwl/devkit';
+import { NxJsonConfiguration, ProjectGraph } from '@nrwl/devkit';
+import { NxArgs } from 'nx/src/utils/command-line-utils';
 
 import * as fs from 'fs';
 import * as fsExtra from 'fs-extra';
@@ -56,6 +56,7 @@ export const customTasksRunner: TasksRunner<CustomTasksRunnerOptions> = (tasks: 
     target?: string;
     initiatingProject?: string | null;
     projectGraph: ProjectGraph;
+    nxArgs: NxArgs;
     nxJson: NxJsonConfiguration;
 }) => {
     console.debug('executing customTaskRunner');
